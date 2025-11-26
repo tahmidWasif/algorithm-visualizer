@@ -4,11 +4,13 @@ import javafx.animation.ParallelTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
@@ -81,11 +83,47 @@ public class MainController {
         Rectangle rect = new Rectangle(50, 50);
         rect.setStyle("-fx-fill: white; -fx-stroke: black; -fx-stroke-width: 2;");
 
+        rect.setUserData("cellRect");   // Tag
+
         Label label = new Label(String.valueOf(value));
         label.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
 
         StackPane stack = new StackPane(rect, label);
         return stack;
+    }
+
+    private void highlight(int index) {
+        Rectangle r = (Rectangle) cellNodes.get(index).getChildren().get(0);
+        r.setFill(Color.YELLOW);
+        r.setStroke(Color.RED);
+    }
+
+    private void unhighlight(int index) {
+        Rectangle r = (Rectangle) cellNodes.get(index).getChildren().get(0);
+        r.setFill(Color.WHITE);
+        r.setStroke(Color.BLACK);
+    }
+
+    private void highlightSwap(int i, int j) {
+        Rectangle r1 = (Rectangle) cellNodes.get(i).getChildren().get(0);
+        Rectangle r2 = (Rectangle) cellNodes.get(j).getChildren().get(0);
+
+        r1.setFill(Color.ORANGE);
+        r2.setFill(Color.ORANGE);
+    }
+
+    private void flashSuccess() {
+        for (Node n : arrayContainer.getChildren()) {
+            Rectangle r = (Rectangle) ((StackPane) n).getChildren().get(0);
+            r.setFill(Color.LIGHTGREEN);
+        }
+    }
+
+    private void resetColor() {
+        for (Node n : arrayContainer.getChildren()) {
+            Rectangle r = (Rectangle) ((StackPane) n).getChildren().get(0);
+            r.setFill(Color.WHITE);
+        }
     }
 
     /*
@@ -155,7 +193,18 @@ public class MainController {
                         int x = j;
                         int y = j + 1;
 
+                        Platform.runLater(() -> {
+                            highlight(x);
+                            highlight(y);
+                        });
+
+                        Thread.sleep((long)(150 / getAnimationSpeed()));
+
                         if (data[x] > data[y]) {
+
+                            // Color change while swapping
+                            Platform.runLater(() -> highlightSwap(x, y));
+
                             int temp = data[x];
                             data[x] = data[y];
                             data[y] = temp;
@@ -170,9 +219,20 @@ public class MainController {
                             latch.await();
                         }
 
+                        Platform.runLater(() -> {
+                            unhighlight(x);
+                            unhighlight(y);
+                        });
+
                         Thread.sleep(getComparisonDelay());
                     }
                 }
+
+                // Success flash
+                Platform.runLater(() -> flashSuccess());
+                Thread.sleep(250);
+                Platform.runLater(() -> resetColor());
+
             } catch (Exception ignored) {}
         }).start();
     }
