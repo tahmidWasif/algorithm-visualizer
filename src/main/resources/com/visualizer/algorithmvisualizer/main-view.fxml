@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<BorderPane fx:controller="com.visualizer.algorithmvisualizer.MainController"
+            xmlns:fx="http://javafx.com/fxml">
+
+    <top>
+        <ToolBar>
+            <ChoiceBox fx:id="algorithmChoice">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Bubble Sort"/>
+                        <String fx:value="Selection Sort"/>
+                        <String fx:value="Insertion Sort"/>
+                    </FXCollections>
+                </items>
+            </ChoiceBox>
+
+            <Button text="Generate Data" onAction="#handleGenerate"/>
+            <Button text="Start" onAction="#handleStart"/>
+            <Slider fx:id="speedSlider" min="0.1" max="5" value="1" blockIncrement="0.1" />
+            <Label fx:id="speedLabel" text="1.0x" />
+        </ToolBar>
+    </top>
+
+    <center>
+        <ScrollPane fitToHeight="true" fitToWidth="true">
+            <HBox fx:id="arrayContainer" spacing="10" style="-fx-padding: 20; -fx-alignment: center" />
+        </ScrollPane>
+    </center>
+
+</BorderPane>
