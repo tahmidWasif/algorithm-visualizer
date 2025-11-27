@@ -107,38 +107,4 @@ public class SortingController {
         StackPane stack = new StackPane(rect, label);
         return stack;
     }
-
-    private void highlight(int index) {
-        Rectangle r = (Rectangle) cellNodes.get(index).getChildren().get(0);
-        r.setFill(Color.YELLOW);
-        r.setStroke(Color.RED);
-    }
-
-    private void unhighlight(int index) {
-        Rectangle r = (Rectangle) cellNodes.get(index).getChildren().get(0);
-        r.setFill(Color.WHITE);
-        r.setStroke(Color.BLACK);
-    }
-
-    private void highlightSwap(int i, int j) {
-        Rectangle r1 = (Rectangle) cellNodes.get(i).getChildren().get(0);
-        Rectangle r2 = (Rectangle) cellNodes.get(j).getChildren().get(0);
-
-        r1.setFill(Color.ORANGE);
-        r2.setFill(Color.ORANGE);
-    }
-
-    private void flashSuccess() {
-        for (Node n : arrayContainer.getChildren()) {
-            Rectangle r = (Rectangle) ((StackPane) n).getChildren().get(0);
-            r.setFill(Color.LIGHTGREEN);
-        }
-    }
-
-    private void resetColor() {
-        for (Node n : arrayContainer.getChildren()) {
-            Rectangle r = (Rectangle) ((StackPane) n).getChildren().get(0);
-            r.setFill(Color.WHITE);
-        }
-    }
 }
