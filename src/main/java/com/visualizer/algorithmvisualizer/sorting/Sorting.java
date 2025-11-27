@@ -1,0 +1,125 @@
+package com.visualizer.algorithmvisualizer.sorting;
+
+import javafx.animation.ParallelTransition;
+import javafx.animation.TranslateTransition;
+import javafx.scene.Node;
+import javafx.scene.control.Slider;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
+
+import java.util.Collections;
+import java.util.List;
+
+public abstract class Sorting {
+
+    protected int[] data;
+    protected List<StackPane> cellNodes;
+    protected HBox arrayContainer;
+    protected Slider speedSlider;
+    protected double speed = 1.0;
+
+    public Sorting(List<StackPane> cellNodes, HBox arrayContainer, Slider speedSlider, int[] data) {
+        this.cellNodes = cellNodes;
+        this.arrayContainer = arrayContainer;
+        this.speedSlider = speedSlider;
+        this.data = data;
+    }
+
+    /*
+    Coloring the cells in the array
+     */
+    protected void highlight(int index) {
+        Rectangle r = (Rectangle) cellNodes.get(index).getChildren().get(0);
+        r.setFill(Color.YELLOW);
+        r.setStroke(Color.RED);
+    }
+
+    protected void unhighlight(int index) {
+        Rectangle r = (Rectangle) cellNodes.get(index).getChildren().get(0);
+        r.setFill(Color.WHITE);
+        r.setStroke(Color.BLACK);
+    }
+
+    protected void highlightSwap(int i, int j) {
+        Rectangle r1 = (Rectangle) cellNodes.get(i).getChildren().get(0);
+        Rectangle r2 = (Rectangle) cellNodes.get(j).getChildren().get(0);
+
+        r1.setFill(Color.ORANGE);
+        r2.setFill(Color.ORANGE);
+    }
+
+    protected void flashSuccess() {
+        for (Node n : arrayContainer.getChildren()) {
+            Rectangle r = (Rectangle) ((StackPane) n).getChildren().get(0);
+            r.setFill(Color.LIGHTGREEN);
+        }
+    }
+
+    protected void resetColor() {
+        for (Node n : arrayContainer.getChildren()) {
+            Rectangle r = (Rectangle) ((StackPane) n).getChildren().get(0);
+            r.setFill(Color.WHITE);
+        }
+    }
+
+    /*
+    Swapping Animation
+     */
+    protected double getAnimationSpeed() {
+        return speedSlider.getValue();
+    }
+
+    protected Duration getSwapDuration() {
+        double base = 300;
+        return Duration.millis(base / getAnimationSpeed());
+    }
+
+    protected long getComparisonDelay() {
+        long base = 150;
+        return (long) (base / getAnimationSpeed());
+    }
+
+    protected void animateSwap(int i, int j, Runnable onFinished) {
+        StackPane nodeA = cellNodes.get(i);
+        StackPane nodeB = cellNodes.get(j);
+
+        double distance = nodeB.getLayoutX() - nodeA.getLayoutX();
+        System.out.println("Distance NodeA: " + nodeA.getLayoutX());
+        System.out.println("Distance NodeB: " + nodeB.getLayoutX());
+
+        TranslateTransition moveA = new TranslateTransition(getSwapDuration(), nodeA);
+        TranslateTransition moveB = new TranslateTransition(getSwapDuration(), nodeB);
+
+        moveA.setByX(distance);
+        moveB.setByX(-distance);
+        System.out.println("Moved the nodes");
+
+        ParallelTransition pt = new ParallelTransition(moveA, moveB);
+        pt.setOnFinished(event -> {
+            try {
+                // Reset the positions
+                nodeA.setTranslateX(0);
+                nodeB.setTranslateX(0);
+                System.out.println("Reset the positions");
+
+                // Swap in HBox
+                Collections.swap(cellNodes, i, j);
+                arrayContainer.getChildren().setAll(cellNodes);
+                System.out.println("Replaced children with setAll");
+
+                onFinished.run();
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                onFinished.run();
+            }
+        });
+
+        pt.play();
+    }
+
+    public abstract void sort();
+}
