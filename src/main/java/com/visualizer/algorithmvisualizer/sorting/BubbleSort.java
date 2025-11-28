@@ -1,12 +1,10 @@
 package com.visualizer.algorithmvisualizer.sorting;
 
-import javafx.application.Platform;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
 
 public class BubbleSort extends Sorting {
 
