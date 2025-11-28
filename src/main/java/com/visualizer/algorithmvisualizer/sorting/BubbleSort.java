@@ -20,48 +20,18 @@ public class BubbleSort extends Sorting {
             try {
                 for (int i = 0; i < data.length - 1; i++) {
                     for (int j = 0; j < data.length - i - 1; j++) {
-                        int x = j;
-                        int y = j + 1;
 
-                        Platform.runLater(() -> {
-                            highlight(x);
-                            highlight(y);
-                        });
+                        compare(j, j + 1);
 
-                        Thread.sleep((long)(150 / getAnimationSpeed()));
+                        if (data[j] > data[j + 1]) {
 
-                        if (data[x] > data[y]) {
-
-                            // Color change while swapping
-                            Platform.runLater(() -> highlightSwap(x, y));
-
-                            int temp = data[x];
-                            data[x] = data[y];
-                            data[y] = temp;
-
-                            // Block thread until swap completes
-                            CountDownLatch latch = new CountDownLatch(1);
-
-                            Platform.runLater(() -> {
-                                animateSwap(x, y, latch::countDown);
-                            });
-
-                            latch.await();
+                            swap(j, j + 1);
                         }
-
-                        Platform.runLater(() -> {
-                            unhighlight(x);
-                            unhighlight(y);
-                        });
-
-                        Thread.sleep(getComparisonDelay());
                     }
                 }
 
                 // Success flash
-                Platform.runLater(() -> flashSuccess());
-                Thread.sleep(250);
-                Platform.runLater(() -> resetColor());
+                success();
 
             } catch (Exception ignored) {}
         }).start();

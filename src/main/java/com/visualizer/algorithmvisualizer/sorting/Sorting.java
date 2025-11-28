@@ -2,6 +2,7 @@ package com.visualizer.algorithmvisualizer.sorting;
 
 import javafx.animation.ParallelTransition;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.HBox;
@@ -12,6 +13,7 @@ import javafx.util.Duration;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 public abstract class Sorting {
 
@@ -119,6 +121,51 @@ public abstract class Sorting {
         });
 
         pt.play();
+    }
+
+    // helper functions
+    protected void swap(int x, int y) throws InterruptedException {
+        Platform.runLater(() -> highlightSwap(x, y));
+
+        int temp = data[x];
+        data[x] = data[y];
+        data[y] = temp;
+
+        // Block thread until swap completes
+        CountDownLatch latch = new CountDownLatch(1);
+
+        Platform.runLater(() -> {
+            animateSwap(x, y, latch::countDown);
+        });
+
+        latch.await();
+
+        Platform.runLater(() -> {
+            unhighlight(x);
+            unhighlight(y);
+        });
+    }
+
+    protected void compare(int x, int y) throws InterruptedException {
+        Platform.runLater(() -> {
+            highlight(x);
+            highlight(y);
+        });
+
+        Thread.sleep((long)(150 / getAnimationSpeed()));
+
+        Platform.runLater(() -> {
+            unhighlight(x);
+            unhighlight(y);
+        });
+
+        Thread.sleep(getComparisonDelay());
+    }
+
+    protected void success() throws InterruptedException {
+        Platform.runLater(() -> flashSuccess());
+        Thread.sleep(250);
+        Platform.runLater(() -> resetColor());
     }
 
     public abstract void sort();

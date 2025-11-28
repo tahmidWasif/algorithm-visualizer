@@ -30,50 +30,14 @@ public class SelectionSort extends Sorting {
                             minIndex = j;
                         }
 
-                        int x = j;
-                        int y = minIndex;
-
-                        Platform.runLater(() -> {
-                            highlight(x);
-                            highlight(y);
-                        });
-
-                        Thread.sleep((long)(150 / getAnimationSpeed()));
-
-                        Platform.runLater(() -> {
-                            unhighlight(x);
-                            unhighlight(y);
-                        });
-
-                        Thread.sleep(getComparisonDelay());
+                        compare(j, minIndex);
                     }
 
-                    int x = i;
-                    int y = minIndex;
-                    Platform.runLater(() -> highlightSwap(x, y));
-
-                    int temp = data[minIndex];
-                    data[minIndex] = data[i];
-                    data[i] = temp;
-
-                    CountDownLatch latch = new CountDownLatch(1);
-
-                    Platform.runLater(() -> {
-                        animateSwap(x, y, latch::countDown);
-                    });
-
-                    latch.await();
-
-                    Platform.runLater(() -> {
-                        unhighlight(x);
-                        unhighlight(y);
-                    });
+                    swap(i ,minIndex);
                 }
 
                 // Success flash
-                Platform.runLater(() -> flashSuccess());
-                Thread.sleep(250);
-                Platform.runLater(() -> resetColor());
+                success();
 
             } catch (Exception ignored) {}
 
