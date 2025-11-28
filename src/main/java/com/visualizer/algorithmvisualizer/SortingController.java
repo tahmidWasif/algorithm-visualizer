@@ -1,6 +1,7 @@
 package com.visualizer.algorithmvisualizer;
 
 import com.visualizer.algorithmvisualizer.sorting.BubbleSort;
+import com.visualizer.algorithmvisualizer.sorting.InsertionSort;
 import com.visualizer.algorithmvisualizer.sorting.SelectionSort;
 import com.visualizer.algorithmvisualizer.sorting.Sorting;
 import javafx.fxml.FXML;
@@ -67,6 +68,10 @@ public class SortingController {
             case "Selection Sort" -> {
                 sorter = new SelectionSort(cellNodes, arrayContainer, speedSlider, data);
                 System.out.println("SelectionSort selected");
+            }
+            case "Insertion Sort" -> {
+                sorter = new InsertionSort(cellNodes, arrayContainer, speedSlider, data);
+                System.out.println("InsertionSort selected");
             }
             default -> System.out.println("Algorithm not implemented");
         }
