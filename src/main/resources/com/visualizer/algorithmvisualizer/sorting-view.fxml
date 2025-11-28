@@ -21,9 +21,11 @@
             </ChoiceBox>
 
             <Button text="Generate Data" onAction="#handleGenerate"/>
-            <Button text="Start" onAction="#handleStart"/>
+            <Button fx:id="startBtn" text="Start" onAction="#handleStart" style="-fx-background-color: green; -fx-text-fill: white;"/>
             <Slider fx:id="speedSlider" min="0.1" max="5" value="1" blockIncrement="0.1" />
             <Label fx:id="speedLabel" text="1.0x" />
+            <Pane fx:id="spacer" HBox.hgrow="ALWAYS" />
+            <Button text="Reset" onAction="#handleReset" style="-fx-background-color: red; -fx-text-fill: white;" />
         </ToolBar>
     </top>
 

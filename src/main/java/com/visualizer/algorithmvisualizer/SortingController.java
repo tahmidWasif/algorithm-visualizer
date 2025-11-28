@@ -3,25 +3,20 @@ package com.visualizer.algorithmvisualizer;
 import com.visualizer.algorithmvisualizer.sorting.BubbleSort;
 import com.visualizer.algorithmvisualizer.sorting.SelectionSort;
 import com.visualizer.algorithmvisualizer.sorting.Sorting;
-import javafx.animation.ParallelTransition;
-import javafx.animation.TranslateTransition;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.util.Duration;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.CountDownLatch;
 
 public class SortingController {
 
@@ -29,12 +24,17 @@ public class SortingController {
     @FXML private HBox arrayContainer;
     @FXML private Slider speedSlider;
     @FXML private Label speedLabel;
+    @FXML private Button startBtn;
+    @FXML private Pane spacer;
 
     private int[] data;
     private List<StackPane> cellNodes = new ArrayList<>();
 
     @FXML
     public void initialize() {
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+        startBtn.setDisable(true);
+
         // set default algorithm
         algorithmChoice.getSelectionModel().selectFirst();
 
@@ -47,11 +47,15 @@ public class SortingController {
     private void handleGenerate() {
         data = generateRandomArray(20);
         displayArray();
+        startBtn.setDisable(false);
     }
 
     @FXML
     private void handleStart() {
-        if (data == null) return;
+        if (data == null) {
+            System.out.println("There is no data");
+            return;
+        }
 
         String algo = algorithmChoice.getValue();
         Sorting sorter = null;
@@ -72,6 +76,18 @@ public class SortingController {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    @FXML
+    private void handleReset() {
+        // Clear UI
+        arrayContainer.getChildren().clear();
+        cellNodes.clear();
+
+        data = null;
+        startBtn.setDisable(true);
+
+        System.out.println("Reset complete");
     }
 
     private int[] generateRandomArray(int size) {
