@@ -26,7 +26,9 @@ public class SortingController {
     @FXML private Slider speedSlider;
     @FXML private Label speedLabel;
     @FXML private Button startBtn;
+    @FXML private Button resetBtn;
     @FXML private Pane spacer;
+    @FXML private Label heading;
 
     private int[] data;
     private List<StackPane> cellNodes = new ArrayList<>();
@@ -42,6 +44,26 @@ public class SortingController {
         speedSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
             speedLabel.setText(String.format("%.1fx", newVal.doubleValue()));
         });
+
+        // reset button
+
+        resetBtn.setOnMousePressed(e -> {
+            resetBtn.setStyle("-fx-background-color: red; -fx-text-fill: white");
+        });
+
+        resetBtn.setOnMouseReleased(e -> {
+            resetBtn.setStyle("-fx-background-color: #2b2d30; -fx-text-fill: white;");
+        });
+
+        // start button
+        startBtn.setOnMousePressed(e -> {
+            startBtn.setStyle("-fx-background-color: green; -fx-text-fill: white");
+        });
+
+        startBtn.setOnMouseReleased(e -> {
+            startBtn.setStyle("-fx-background-color: #2b2d30; -fx-text-fill: white;");
+        });
+
     }
 
     @FXML
@@ -57,6 +79,8 @@ public class SortingController {
             System.out.println("There is no data");
             return;
         }
+
+        startBtn.setStyle("-fx-background-color: green; -fx-text-fill: white;");
 
         String algo = algorithmChoice.getValue();
         Sorting sorter = null;
@@ -85,12 +109,14 @@ public class SortingController {
 
     @FXML
     private void handleReset() {
+
         // Clear UI
         arrayContainer.getChildren().clear();
         cellNodes.clear();
 
         data = null;
         startBtn.setDisable(true);
+        startBtn.setStyle("-fx-background-color: #2b2d30; -fx-text-fill: white;");
 
         System.out.println("Reset complete");
     }
@@ -118,7 +144,7 @@ public class SortingController {
 
     private StackPane createCell(int value) {
         Rectangle rect = new Rectangle(50, 50);
-        rect.setStyle("-fx-fill: white; -fx-stroke: black; -fx-stroke-width: 2;");
+        rect.setStyle("-fx-fill: grey; -fx-stroke: black; -fx-stroke-width: 2;");
 
         rect.setUserData("cellRect");   // Tag
 

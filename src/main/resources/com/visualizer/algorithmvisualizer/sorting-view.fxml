@@ -5,12 +5,14 @@
 
 <?import javafx.collections.FXCollections?>
 <?import java.lang.String?>
+<?import javafx.scene.text.Text?>
 <BorderPane fx:controller="com.visualizer.algorithmvisualizer.SortingController"
-            xmlns:fx="http://javafx.com/fxml">
+            xmlns:fx="http://javafx.com/fxml"
+            stylesheets="@sorting.css">
 
     <top>
-        <ToolBar>
-            <ChoiceBox fx:id="algorithmChoice">
+        <ToolBar >
+            <ChoiceBox fx:id="algorithmChoice" >
                 <items>
                     <FXCollections fx:factory="observableArrayList">
                         <String fx:value="Bubble Sort"/>
@@ -20,18 +22,21 @@
                 </items>
             </ChoiceBox>
 
-            <Button text="Generate Data" onAction="#handleGenerate"/>
-            <Button fx:id="startBtn" text="Start" onAction="#handleStart" style="-fx-background-color: green; -fx-text-fill: white;"/>
+            <Button text="Generate Data" onAction="#handleGenerate" style="-fx-background-color: #2b2d30; -fx-text-fill: white"/>
+            <Button fx:id="startBtn" text="Start" onAction="#handleStart" style="-fx-background-color: #2b2d30; -fx-text-fill: white;"/>
             <Slider fx:id="speedSlider" min="0.1" max="5" value="1" blockIncrement="0.1" />
-            <Label fx:id="speedLabel" text="1.0x" />
+            <Label fx:id="speedLabel" text="1.0x" style="-fx-text-fill: white" />
             <Pane fx:id="spacer" HBox.hgrow="ALWAYS" />
-            <Button text="Reset" onAction="#handleReset" style="-fx-background-color: red; -fx-text-fill: white;" />
+            <Button fx:id="resetBtn" text="Reset" onAction="#handleReset" style="-fx-background-color: #2b2d30; -fx-text-fill: white;" />
         </ToolBar>
     </top>
 
+
+
     <center>
-        <ScrollPane fitToHeight="true" fitToWidth="true">
-            <HBox fx:id="arrayContainer" spacing="10" style="-fx-padding: 20; -fx-alignment: center" />
+
+        <ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-border-color: black; -fx-background-color: #1e1f22">
+            <HBox fx:id="arrayContainer" spacing="10" style="-fx-padding: 20; -fx-alignment: center; -fx-background-color: black; -fx-border-color: black" />
         </ScrollPane>
     </center>
 
