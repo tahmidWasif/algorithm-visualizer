@@ -23,11 +23,22 @@
                 </items>
             </ChoiceBox>
 
+            <HBox style="-fx-background-color: #2b2d30; -fx-background-radius: 4; -fx-alignment: center; -fx-padding: 5px">
+                <Label text="Data Size:" style="-fx-text-fill: white" />
+                <Slider fx:id="arraySize" min="1" max="16" value="10" blockIncrement="1"/>
+                <Label fx:id="sizeLabel" text="10" style="-fx-text-fill: white" />
+            </HBox>
+
             <Button fx:id="generateBtn" text="Generate Data" onAction="#handleGenerate" style="-fx-background-color: #2b2d30; -fx-text-fill: white"/>
             <Button fx:id="startBtn" text="Start" onAction="#handleStart" style="-fx-background-color: #2b2d30; -fx-text-fill: white;"/>
-            <Slider fx:id="speedSlider" min="0.1" max="10" value="1" blockIncrement="0.1" />
-            <Label fx:id="speedLabel" text="1.0x" style="-fx-text-fill: white" />
-            <Pane fx:id="spacer" HBox.hgrow="ALWAYS" />
+
+            <HBox style="-fx-background-color: #2b2d30; -fx-background-radius: 4; -fx-alignment: center; -fx-padding: 5px">
+                <Label text="  Speed:" style="-fx-text-fill: white;" />
+                <Slider fx:id="speedSlider" min="0.1" max="10" value="1" blockIncrement="0.1" />
+                <Label fx:id="speedLabel" text="1.0x" style="-fx-text-fill: white" />
+            </HBox>
+
+            <Pane HBox.hgrow="ALWAYS" />
             <Button fx:id="resetBtn" text="Reset" onAction="#handleReset" style="-fx-background-color: #2b2d30; -fx-text-fill: white;" />
         </ToolBar>
     </top>

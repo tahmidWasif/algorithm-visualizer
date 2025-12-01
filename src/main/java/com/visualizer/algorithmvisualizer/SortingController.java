@@ -22,16 +22,16 @@ public class SortingController {
     @FXML private Button generateBtn;
     @FXML private Button startBtn;
     @FXML private Button resetBtn;
-    @FXML private Pane spacer;
     @FXML private Label heading;
     @FXML private VBox levelsContainer;
+    @FXML private Slider arraySize;
+    @FXML private Label sizeLabel;
 
     private int[] data;
     private List<StackPane> cellNodes = new ArrayList<>();
 
     @FXML
     public void initialize() {
-        HBox.setHgrow(spacer, Priority.ALWAYS);
         startBtn.setDisable(true);
 
         // set default algorithm
@@ -39,6 +39,11 @@ public class SortingController {
 
         speedSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
             speedLabel.setText(String.format("%.1fx", newVal.doubleValue()));
+        });
+
+        // array size slider
+        arraySize.valueProperty().addListener((obs, oldVal, newVal) -> {
+            sizeLabel.setText(String.format("%d", newVal.intValue()));
         });
 
         // reset button
@@ -60,6 +65,7 @@ public class SortingController {
             startBtn.setStyle("-fx-background-color: #2b2d30; -fx-text-fill: white;");
         });
 
+        // description
         algorithmChoice.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             heading.setText(newVal);
         });
@@ -67,7 +73,7 @@ public class SortingController {
 
     @FXML
     private void handleGenerate() {
-        data = generateRandomArray(10);
+        data = generateRandomArray((int) arraySize.getValue());
         displayArray();
         startBtn.setDisable(false);
     }
@@ -125,6 +131,12 @@ public class SortingController {
         generateBtn.setDisable(false);
         startBtn.setDisable(true);
         startBtn.setStyle("-fx-background-color: #2b2d30; -fx-text-fill: white;");
+
+        // reset speed slider
+        speedSlider.adjustValue(1);
+
+        // reset array size slider
+        arraySize.adjustValue(10);
 
         // remove any extra rows created by merge sort
         while (levelsContainer.getChildren().size() > 2) {
