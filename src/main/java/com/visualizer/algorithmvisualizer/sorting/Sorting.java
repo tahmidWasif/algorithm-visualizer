@@ -1,7 +1,6 @@
 package com.visualizer.algorithmvisualizer.sorting;
 
 import javafx.animation.ParallelTransition;
-import javafx.animation.PauseTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.scene.Node;
