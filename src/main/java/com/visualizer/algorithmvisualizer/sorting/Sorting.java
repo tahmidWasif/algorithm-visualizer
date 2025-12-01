@@ -21,7 +21,6 @@ public abstract class Sorting {
     protected List<StackPane> cellNodes;
     protected HBox arrayContainer;
     protected Slider speedSlider;
-    protected double speed = 1.0;
 
     public Sorting(List<StackPane> cellNodes, HBox arrayContainer, Slider speedSlider, int[] data) {
         this.cellNodes = cellNodes;
@@ -41,7 +40,7 @@ public abstract class Sorting {
 
     protected void unhighlight(int index) {
         Rectangle r = (Rectangle) cellNodes.get(index).getChildren().get(0);
-        r.setFill(Color.WHITE);
+        r.setFill(Color.LIGHTGREY);
         r.setStroke(Color.BLACK);
     }
 
@@ -63,7 +62,8 @@ public abstract class Sorting {
     protected void resetColor() {
         for (Node n : arrayContainer.getChildren()) {
             Rectangle r = (Rectangle) ((StackPane) n).getChildren().get(0);
-            r.setFill(Color.WHITE);
+            r.setFill(Color.LIGHTGREY);
+            r.setStroke(Color.BLACK);
         }
     }
 
@@ -75,12 +75,12 @@ public abstract class Sorting {
     }
 
     protected Duration getSwapDuration() {
-        double base = 300;
+        double base = 500;
         return Duration.millis(base / getAnimationSpeed());
     }
 
     protected long getComparisonDelay() {
-        long base = 150;
+        long base = 350;
         return (long) (base / getAnimationSpeed());
     }
 
@@ -115,7 +115,6 @@ public abstract class Sorting {
                 onFinished.run();
 
             } catch (Exception ex) {
-                ex.printStackTrace();
                 onFinished.run();
             }
         });
@@ -166,6 +165,23 @@ public abstract class Sorting {
         Platform.runLater(() -> flashSuccess());
         Thread.sleep(250);
         Platform.runLater(() -> resetColor());
+    }
+
+    // MergeSort
+    protected void pause() throws InterruptedException {
+        Thread.sleep((long)(250 / getAnimationSpeed()));
+    }
+
+    protected void highlight(StackPane node) {
+        Rectangle r = (Rectangle) node.getChildren().get(0);
+        r.setFill(Color.YELLOW);
+        r.setStroke(Color.RED);
+    }
+
+    protected void unhighlight(StackPane node) {
+        Rectangle r = (Rectangle) node.getChildren().get(0);
+        r.setFill(Color.LIGHTGREY);
+        r.setStroke(Color.BLACK);
     }
 
     public abstract void sort();

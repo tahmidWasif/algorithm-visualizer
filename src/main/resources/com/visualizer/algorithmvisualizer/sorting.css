@@ -40,3 +40,17 @@
 .slider .track {
     -fx-background-color: #4c4d50;
 }
+
+#heading {
+    -fx-text-fill: white;
+    -fx-text-alignment: center;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-padding: 20px;
+}
+
+#levelsContainer {
+    -fx-border-color: #1e1f22;
+    -fx-background-color: #000000;
+    -fx-alignment: top-center;
+}

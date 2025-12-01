@@ -1,18 +1,12 @@
 package com.visualizer.algorithmvisualizer;
 
-import com.visualizer.algorithmvisualizer.sorting.BubbleSort;
-import com.visualizer.algorithmvisualizer.sorting.InsertionSort;
-import com.visualizer.algorithmvisualizer.sorting.SelectionSort;
-import com.visualizer.algorithmvisualizer.sorting.Sorting;
+import com.visualizer.algorithmvisualizer.sorting.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
@@ -25,10 +19,12 @@ public class SortingController {
     @FXML private HBox arrayContainer;
     @FXML private Slider speedSlider;
     @FXML private Label speedLabel;
+    @FXML private Button generateBtn;
     @FXML private Button startBtn;
     @FXML private Button resetBtn;
     @FXML private Pane spacer;
     @FXML private Label heading;
+    @FXML private VBox levelsContainer;
 
     private int[] data;
     private List<StackPane> cellNodes = new ArrayList<>();
@@ -64,11 +60,14 @@ public class SortingController {
             startBtn.setStyle("-fx-background-color: #2b2d30; -fx-text-fill: white;");
         });
 
+        algorithmChoice.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+            heading.setText(newVal);
+        });
     }
 
     @FXML
     private void handleGenerate() {
-        data = generateRandomArray(20);
+        data = generateRandomArray(10);
         displayArray();
         startBtn.setDisable(false);
     }
@@ -80,7 +79,9 @@ public class SortingController {
             return;
         }
 
-        startBtn.setStyle("-fx-background-color: green; -fx-text-fill: white;");
+        algorithmChoice.setDisable(true);
+        generateBtn.setDisable(true);
+        startBtn.setDisable(true);
 
         String algo = algorithmChoice.getValue();
         Sorting sorter = null;
@@ -97,13 +98,17 @@ public class SortingController {
                 sorter = new InsertionSort(cellNodes, arrayContainer, speedSlider, data);
                 System.out.println("InsertionSort selected");
             }
+            case "Merge Sort" -> {
+                sorter = new MergeSort(cellNodes, arrayContainer, speedSlider, data);
+                System.out.println("MergeSort selected");
+            }
             default -> System.out.println("Algorithm not implemented");
         }
         try {
             System.out.println("Executing sort");
             sorter.sort();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            System.out.println(ex.getMessage());
         }
     }
 
@@ -115,8 +120,16 @@ public class SortingController {
         cellNodes.clear();
 
         data = null;
+
+        algorithmChoice.setDisable(false);
+        generateBtn.setDisable(false);
         startBtn.setDisable(true);
         startBtn.setStyle("-fx-background-color: #2b2d30; -fx-text-fill: white;");
+
+        // remove any extra rows created by merge sort
+        while (levelsContainer.getChildren().size() > 2) {
+            levelsContainer.getChildren().remove(2);
+        }
 
         System.out.println("Reset complete");
     }
@@ -144,7 +157,7 @@ public class SortingController {
 
     private StackPane createCell(int value) {
         Rectangle rect = new Rectangle(50, 50);
-        rect.setStyle("-fx-fill: grey; -fx-stroke: black; -fx-stroke-width: 2;");
+        rect.setStyle("-fx-fill: lightgrey; -fx-stroke: black; -fx-stroke-width: 2;");
 
         rect.setUserData("cellRect");   // Tag
 
