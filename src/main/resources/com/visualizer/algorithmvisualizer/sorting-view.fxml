@@ -6,32 +6,43 @@
 <?import javafx.collections.FXCollections?>
 <?import java.lang.String?>
 <BorderPane fx:controller="com.visualizer.algorithmvisualizer.SortingController"
-            xmlns:fx="http://javafx.com/fxml">
+            xmlns:fx="http://javafx.com/fxml"
+            stylesheets="@sorting.css">
 
     <top>
-        <ToolBar>
+        <ToolBar >
             <ChoiceBox fx:id="algorithmChoice">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
                         <String fx:value="Bubble Sort"/>
                         <String fx:value="Selection Sort"/>
                         <String fx:value="Insertion Sort"/>
+                        <String fx:value="Merge Sort" />
                     </FXCollections>
                 </items>
             </ChoiceBox>
 
-            <Button text="Generate Data" onAction="#handleGenerate"/>
-            <Button fx:id="startBtn" text="Start" onAction="#handleStart" style="-fx-background-color: green; -fx-text-fill: white;"/>
-            <Slider fx:id="speedSlider" min="0.1" max="5" value="1" blockIncrement="0.1" />
-            <Label fx:id="speedLabel" text="1.0x" />
+            <Button fx:id="generateBtn" text="Generate Data" onAction="#handleGenerate" style="-fx-background-color: #2b2d30; -fx-text-fill: white"/>
+            <Button fx:id="startBtn" text="Start" onAction="#handleStart" style="-fx-background-color: #2b2d30; -fx-text-fill: white;"/>
+            <Slider fx:id="speedSlider" min="0.1" max="10" value="1" blockIncrement="0.1" />
+            <Label fx:id="speedLabel" text="1.0x" style="-fx-text-fill: white" />
             <Pane fx:id="spacer" HBox.hgrow="ALWAYS" />
-            <Button text="Reset" onAction="#handleReset" style="-fx-background-color: red; -fx-text-fill: white;" />
+            <Button fx:id="resetBtn" text="Reset" onAction="#handleReset" style="-fx-background-color: #2b2d30; -fx-text-fill: white;" />
         </ToolBar>
     </top>
 
+
+
     <center>
-        <ScrollPane fitToHeight="true" fitToWidth="true">
-            <HBox fx:id="arrayContainer" spacing="10" style="-fx-padding: 20; -fx-alignment: center" />
+
+        <ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-border-color: #1e1f22; -fx-background-color: #1e1f22">
+            <VBox fx:id="levelsContainer" spacing="10">
+                <VBox style="-fx-alignment: top-center">
+                    <Label fx:id="heading" style="-fx-text-fill: white; -fx-text-alignment: center; -fx-font-size: 20px; -fx-font-weight: bold;">Bubble Sort</Label>
+                    <Label fx:id="description" style="-fx-text-fill: white; -fx-text-alignment: center; -fx-font-size: 16px; -fx-font-weight: normal;"></Label>
+                </VBox>
+                <HBox fx:id="arrayContainer" spacing="10" style="-fx-padding: 20; -fx-alignment: center; -fx-background-color: black; -fx-border-color: black" />
+            </VBox>
         </ScrollPane>
     </center>
 
