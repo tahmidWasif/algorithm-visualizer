@@ -21,6 +21,7 @@ public class GraphController {
     @FXML private ComboBox<String> algorithmSelector;
     @FXML private Button runBtn;
     @FXML private TextField weightField;
+    @FXML private Button deleteNodeBtn;
 
     private GraphicsContext gc;
 
@@ -43,6 +44,25 @@ public class GraphController {
         addEdgeBtn.setOnAction(e -> handleAddEdge());
         clearBtn.setOnAction(e -> clearGraph());
         runBtn.setOnAction(e -> runAlgorithm());
+        deleteNodeBtn.setOnAction(e -> {
+            if (selectedA == null && selectedB == null) return;
+
+            // remove edges
+            graph.getEdges().removeIf(edge ->
+                    edge.from == selectedA || edge.to == selectedA ||
+                    edge.from == selectedB || edge.to == selectedB
+            );
+
+            // remove node
+            graph.getNodes().removeIf(node ->
+                    node == selectedA || node == selectedB
+            );
+
+            this.selectedA = null;
+            this.selectedB = null;
+
+            draw();
+        });
     }
 
     private void draw() {
@@ -112,6 +132,8 @@ public class GraphController {
                 selectedB = null;
             }
         }
+
+
 
         draw();
     }

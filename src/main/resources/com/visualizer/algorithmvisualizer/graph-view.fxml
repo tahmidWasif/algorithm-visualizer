@@ -14,7 +14,9 @@
                 <Label text="Edge Weight:" style="-fx-padding: 5px; -fx-text-fill: white"/>
                 <TextField fx:id="weightField" text="1" prefWidth="40"/>
             </HBox>
+
             <Button fx:id="addEdgeBtn" text="Add Edge"/>
+            <Button fx:id="deleteNodeBtn" text="Delete Node"/>
 
             <ComboBox fx:id="algorithmSelector" promptText="Algorithm"/>
             <Button fx:id="runBtn" text="Run"/>
