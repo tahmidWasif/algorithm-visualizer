@@ -17,8 +17,6 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
 
 public class GraphController {
 
@@ -42,7 +40,7 @@ public class GraphController {
     @FXML
     public void initialize() {
         gc = canvas.getGraphicsContext2D();
-        algorithmSelector.getItems().addAll("DFS", "BFS", "Dijkstra", "A*");
+        algorithmSelector.getItems().addAll("DFS", "BFS", "Dijkstra");
 
         draw();
 
@@ -107,8 +105,10 @@ public class GraphController {
 
         // Draw nodes
         for (GraphNode node : graph.getNodes()) {
-            if (node == selectedA || node == selectedB) {
-                gc.setFill(Color.ORANGE);
+            if (node == selectedA) {
+                gc.setFill(Color.GREEN);
+            } else if (node == selectedB) {
+                gc.setFill(Color.RED);
             } else {
                 gc.setFill(Color.DODGERBLUE);
             }
@@ -199,7 +199,6 @@ public class GraphController {
             case "DFS" -> animateDFS();
             case "BFS" -> animateBFS();
             case "Dijkstra" -> animateDijkstra();
-            case "A*" -> animateAStar();
         }
     }
 
@@ -210,35 +209,34 @@ public class GraphController {
     private void animateDFS() {
         System.out.println("DFS running...");
         if (graph.getNodes().isEmpty()) return;
+        if (selectedA == null) return;
 
         Dfs dfsRunner = new Dfs(graph, canvas);
 
-        GraphNode start = graph.getNodes().get(0);
+        GraphNode start = selectedA;
         dfsRunner.animateDFS(start);
     }
 
     private void animateBFS() {
         System.out.println("BFS running...");
         if (graph.getNodes().isEmpty()) return;
+        if (selectedA == null) return;
 
         Bfs bfsRunner = new Bfs(graph, canvas);
 
-        GraphNode start = graph.getNodes().get(0);
+        GraphNode start = selectedA;
         bfsRunner.animateBFS(start);
     }
 
     private void animateDijkstra() {
         System.out.println("Dijkstra running...");
         if (graph.getNodes().isEmpty()) return;
+        if (selectedA == null) return;
 
         Dijkstra dijkstraRunner = new Dijkstra(graph, canvas);
 
-        GraphNode start = graph.getNodes().get(0);
+        GraphNode start = selectedA;
         dijkstraRunner.animateDijkstra(start);
     }
 
-    private void animateAStar() {
-        System.out.println("A* running...");
-        // TODO: Replace with animation callback
-    }
 }
