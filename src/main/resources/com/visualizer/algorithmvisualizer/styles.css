@@ -1,6 +1,9 @@
 .button {
     -fx-text-fill: white;
     -fx-background-color: #2b2d30;
+    -fx-pref-height: 25;
+    -fx-min-height: 25;
+    -fx-max-height: 25;
 }
 
 .text-field {
@@ -16,6 +19,9 @@
 
 .combo-box {
     -fx-background-color: #2b2d30;
+    -fx-pref-height: 25;
+    -fx-min-height: 25;
+    -fx-max-height: 25;
 }
 
 .combo-box .list-cell {
@@ -50,6 +56,12 @@
 
 .slider .track {
     -fx-background-color: #4c4d50;
+}
+
+.label {
+    -fx-pref-height: 25;
+    -fx-min-height: 25;
+    -fx-max-height: 25;
 }
 
 #heading {
