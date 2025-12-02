@@ -10,8 +10,8 @@
             stylesheets="@styles.css">
 
     <top>
-        <ToolBar >
-            <Button onAction="#switchToMain" text="≡" style="-fx-font-size: 16; -fx-padding: 0 6 0 6; -fx-text-alignment: center" prefHeight="24" minHeight="24" maxHeight="24" />
+        <ToolBar style="-fx-background-color: #1e1f22; -fx-alignment: center; -fx-text-fill: white; -fx-padding: 4 4 1 4;">
+            <Button onAction="#switchToMain" text="≡" style="-fx-font-size: 16; -fx-padding: 0 6 0 6; -fx-text-alignment: center; -fx-background-radius: 3;" prefHeight="25" minHeight="25" maxHeight="25" />
             <ComboBox fx:id="algorithmChoice">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
@@ -23,8 +23,8 @@
                 </items>
             </ComboBox>
 
-            <HBox style="-fx-background-color: #2b2d30; -fx-background-radius: 4; -fx-alignment: center; -fx-padding: 5px">
-                <Label text="Data Size:" style="-fx-text-fill: white"/>
+            <HBox style="-fx-background-color: #2b2d30; -fx-background-radius: 3; -fx-alignment: center; -fx-padding: 0 7 0 2; -fx-text-alignment: center;" prefHeight="25" minHeight="25" maxHeight="25">
+                <Label text="  Data Size:" style="-fx-text-fill: white"/>
                 <Slider fx:id="arraySize" min="1" max="16" value="10" blockIncrement="1"/>
                 <Label fx:id="sizeLabel" text="10" style="-fx-text-fill: white" prefWidth="15" minWidth="15" maxWidth="15"/>
             </HBox>
@@ -32,7 +32,7 @@
             <Button fx:id="generateBtn" text="Generate Data" onAction="#handleGenerate" style="-fx-background-color: #2b2d30; -fx-text-fill: white"/>
             <Button fx:id="startBtn" text="Start" onAction="#handleStart" style="-fx-background-color: #2b2d30; -fx-text-fill: white;"/>
 
-            <HBox style="-fx-background-color: #2b2d30; -fx-background-radius: 4; -fx-alignment: center; -fx-padding: 5px">
+            <HBox style="-fx-background-color: #2b2d30; -fx-background-radius: 3; -fx-alignment: center; -fx-padding: 0 7 0 2; -fx-text-alignment: center;" prefHeight="25" minHeight="25" maxHeight="25">
                 <Label text="  Speed:" style="-fx-text-fill: white;" />
                 <Slider fx:id="speedSlider" min="0.1" max="10" value="1" blockIncrement="0.1" />
                 <Label fx:id="speedLabel" text="1.0x" style="-fx-text-fill: white" prefWidth="30" minWidth="30" maxWidth="30"/>
