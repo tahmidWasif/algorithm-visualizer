@@ -11,9 +11,9 @@
     <top>
         <ToolBar style="-fx-background-color: #1e1f22; -fx-alignment: center; -fx-text-fill: white">
             <Button onAction="#switchToMain" text="Home"/>
-            <HBox style="-fx-background-color: #2b2d30; -fx-background-radius: 4; -fx-alignment: center; -fx-padding: 2px;">
-                <Label text="Edge Weight:" style="-fx-padding: 5px; -fx-text-fill: white"/>
-                <TextField fx:id="weightField" text="1" prefWidth="40"/>
+            <HBox style="-fx-background-color: #2b2d30; -fx-background-radius: 3; -fx-alignment: center; -fx-padding: 0 7 0 2;">
+                <Label text="Edge Weight:" style="-fx-padding: 0 5 0 5; -fx-text-fill: white" prefHeight="24" minHeight="24" maxHeight="24"/>
+                <TextField fx:id="weightField" text="1" prefWidth="60" minWidth="60" maxWidth="60" prefHeight="18" minHeight="18" maxHeight="18"/>
             </HBox>
 
             <Button fx:id="addEdgeBtn" text="Add Edge"/>
