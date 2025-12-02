@@ -23,9 +23,9 @@
             </ComboBox>
 
             <HBox style="-fx-background-color: #2b2d30; -fx-background-radius: 4; -fx-alignment: center; -fx-padding: 5px">
-                <Label text="Data Size:" style="-fx-text-fill: white" />
+                <Label text="Data Size:" style="-fx-text-fill: white"/>
                 <Slider fx:id="arraySize" min="1" max="16" value="10" blockIncrement="1"/>
-                <Label fx:id="sizeLabel" text="10" style="-fx-text-fill: white" />
+                <Label fx:id="sizeLabel" text="10" style="-fx-text-fill: white" prefWidth="15" minWidth="15" maxWidth="15"/>
             </HBox>
 
             <Button fx:id="generateBtn" text="Generate Data" onAction="#handleGenerate" style="-fx-background-color: #2b2d30; -fx-text-fill: white"/>
@@ -34,7 +34,7 @@
             <HBox style="-fx-background-color: #2b2d30; -fx-background-radius: 4; -fx-alignment: center; -fx-padding: 5px">
                 <Label text="  Speed:" style="-fx-text-fill: white;" />
                 <Slider fx:id="speedSlider" min="0.1" max="10" value="1" blockIncrement="0.1" />
-                <Label fx:id="speedLabel" text="1.0x" style="-fx-text-fill: white" />
+                <Label fx:id="speedLabel" text="1.0x" style="-fx-text-fill: white" prefWidth="30" minWidth="30" maxWidth="30"/>
             </HBox>
 
             <Pane HBox.hgrow="ALWAYS" />
