@@ -11,7 +11,7 @@
 
     <top>
         <ToolBar >
-            <Button onAction="#switchToMain" text="Home"/>
+            <Button onAction="#switchToMain" text="≡" style="-fx-font-size: 16; -fx-padding: 0 6 0 6; -fx-text-alignment: center" prefHeight="24" minHeight="24" maxHeight="24" />
             <ComboBox fx:id="algorithmChoice">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
