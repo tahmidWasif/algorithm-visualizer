@@ -18,6 +18,7 @@ public class MainController {
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 
         Scene scene = new Scene(newRoot, 1280, 720);
+        stage.close();
         stage.setScene(scene);
         stage.show();
     }
@@ -28,6 +29,7 @@ public class MainController {
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 
         Scene scene = new Scene(newRoot, 1280, 720);
+        stage.close();
         stage.setScene(scene);
         stage.show();
     }

@@ -12,9 +12,13 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -80,10 +84,23 @@ public class SortingController {
 
     @FXML
     private void switchToMain(ActionEvent e) throws IOException {
+        // Load video
+        Media media = new Media(new File("background.mp4").toURI().toString());
+        MediaPlayer player = new MediaPlayer(media);
+        player.setCycleCount(MediaPlayer.INDEFINITE); // loop forever
+        player.setAutoPlay(true);
+
+        MediaView mediaView = new MediaView(player);
+        mediaView.setPreserveRatio(false);
+
+        StackPane root = new StackPane();
+
         Parent newRoot = FXMLLoader.load(getClass().getResource("main-view.fxml"));
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 
-        Scene scene = new Scene(newRoot, 1280, 720);
+        root.getChildren().addAll(mediaView, newRoot);
+
+        Scene scene = new Scene(root, 1280, 720);
         stage.setScene(scene);
         stage.show();
     }

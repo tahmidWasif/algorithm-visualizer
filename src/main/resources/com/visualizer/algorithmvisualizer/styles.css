@@ -57,7 +57,7 @@
     -fx-text-alignment: center;
     -fx-font-size: 20px;
     -fx-font-weight: bold;
-    -fx-padding: 20px;
+    -fx-padding: 15px;
 }
 
 #levelsContainer {
@@ -76,6 +76,7 @@
     -fx-min-height: 30px;
     -fx-max-width: 150px;
     -fx-max-height: 30px;
+    -fx-font-size: 14px;
 }
 
 #switchToSort:hover {
@@ -101,6 +102,7 @@
     -fx-min-height: 30px;
     -fx-max-width: 150px;
     -fx-max-height: 30px;
+    -fx-font-size: 14px;
 }
 
 #switchToGraph:hover {
