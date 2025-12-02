@@ -29,6 +29,7 @@
 .combo-box-popup .list-view {
     -fx-background-color: #2b2d30;
     -fx-control-inner-background: #2b2d30;
+    -fx-background-radius: 0px 0px 5px 5px;
 }
 
 .combo-box-popup .list-view .list-cell {
@@ -38,29 +39,6 @@
 
 .combo-box-popup .list-view .list-cell:hover {
     -fx-background-color: #2b2d30;     /* hover color */
-}
-
-.choice-box {
-    -fx-background-color: #2b2d30;
-    -fx-mark-color: white;
-}
-
-.choice-box .label {
-    -fx-text-fill: white;
-}
-
-.choice-box .context-menu {
-    /*-fx-effect: null;*/
-    -fx-background-radius: 10px;
-    -fx-background-color: #2b2d30;
-    -fx-border-color: #2b2d30;
-    -fx-border-radius: 10px;
-}
-
-.choice-box .menu-item {
-    -fx-background-color: #2b2d30;
-    -fx-text-fill: white;
-
 }
 
 
