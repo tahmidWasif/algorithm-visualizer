@@ -129,3 +129,9 @@
     -fx-max-width: 150px;
     -fx-max-height: 30px;
 }
+
+#headingMain {
+    -fx-max-height: 45;
+    -fx-min-height: 45;
+    -fx-pref-height: 45;
+}

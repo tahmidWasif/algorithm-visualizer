@@ -13,9 +13,9 @@
             fx:controller="com.visualizer.algorithmvisualizer.MainController"
             stylesheets="@styles.css">
     <center>
-        <VBox alignment="CENTER" style="-fx-background-color: rgb(0, 0, 0, 0.55); -fx-font-family: Consolas;">
+        <VBox alignment="CENTER" style="-fx-background-color: rgb(0, 0, 0, 0.6); -fx-font-family: Consolas;">
 
-                <Label fx:id="heading" style="-fx-font-size: 35; -fx-font-family: Consolas; -fx-font-weight: bold; -fx-text-fill: white;" translateY="-60">Welcome to Algorithm Visualizer</Label>
+                <Label fx:id="headingMain" style="-fx-font-size: 35; -fx-font-family: Consolas; -fx-font-weight: bold; -fx-text-fill: white;" translateY="-70" >Welcome to Algorithm Visualizer</Label>
                 <Button fx:id="switchToSort" onAction="#switchToSorting" text="Sorting Algorithms" translateY="-60"/>
                 <Button fx:id="switchToGraph" onAction="#switchToGraph" text="Graph Algorithms" translateY="-55"/>
 
