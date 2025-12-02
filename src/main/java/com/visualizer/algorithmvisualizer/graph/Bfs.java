@@ -11,98 +11,98 @@ import javafx.util.Duration;
 
 import java.util.*;
 
-public class Dfs {
+public class Bfs {
+
     private static final Color NODE_DEFAULT = Color.DODGERBLUE;
     private static final Color NODE_VISIT = Color.GREEN;
-    private static final Color NODE_BACKTRACK = Color.ORANGE;
     private static final Color NODE_DONE = Color.GREEN;
 
     private static final Color EDGE_DEFAULT = Color.WHITE;
     private static final Color EDGE_VISIT = Color.YELLOW;
-    private static final Color EDGE_BACKTRACK = Color.RED;
 
-    private Timeline dfsTimeline = new Timeline();
+    private Timeline bfsTimeline = new Timeline();
     private double step = 0;
     private final double STEP_DURATION = 300; // ms
 
     private Map<GraphNode, Color> nodeColor = new HashMap<>();
     private Map<GraphEdge, Color> edgeColor = new HashMap<>();
 
-    private Set<GraphNode> visited = new HashSet<>();
     private AdjacencyListGraph graph;
     private Canvas canvas;
 
-    public Dfs(AdjacencyListGraph graph, Canvas canvas) {
+    public Bfs(AdjacencyListGraph graph, Canvas canvas) {
         this.graph = graph;
         this.canvas = canvas;
     }
 
-    public void animateDFS(GraphNode start) {
-        dfsTimeline.stop();
-
-        dfsTimeline = new Timeline();
+    public void animateBFS(GraphNode start) {
+        bfsTimeline.stop();
+        bfsTimeline = new Timeline();
         step = 0;
 
-        visited = new HashSet<>();
+        nodeColor.clear();
+        edgeColor.clear();
 
-        dfsVisit(start, visited);
+        Set<GraphNode> visited = new HashSet<>();
+        Queue<GraphNode> queue = new LinkedList<>();
 
-        dfsTimeline.play();
+        // Start BFS
+        visited.add(start);
+        queue.add(start);
 
-    }
-
-    private void dfsVisit(GraphNode node, Set<GraphNode> visited) {
-        visited.add(node);
-
-        // Color node as visited
+        // First frame: highlight start
         addStep(() -> {
-            nodeColor.put(node, NODE_VISIT);
+            nodeColor.put(start, NODE_VISIT);
             drawGraph();
         });
 
-        // Visit neighbors
-        for (GraphEdge e : graph.getEdges()) {
-            GraphNode next = null;
+        // BFS loop
+        while (!queue.isEmpty()) {
+            GraphNode node = queue.poll();
 
-            if (e.from == node) {
-                next = e.to;
-            } else if (e.to == node) {
-                next = e.from;
-            }
+            for (GraphEdge e : graph.getEdges()) {
 
-            if (next != null) {
+                GraphNode next = null;
+                if (e.from == node) next = e.to;
+                else if (e.to == node) next = e.from;
+
+                if (next == null) continue;
+
                 if (!visited.contains(next)) {
+                    visited.add(next);
+                    queue.add(next);
+
+                    GraphNode finalNode = node;
+                    GraphNode finalNext = next;
+                    GraphEdge finalEdge = e;
+
+                    // Highlight edge being used
                     addStep(() -> {
-                        edgeColor.put(e, EDGE_VISIT);
+                        edgeColor.put(finalEdge, EDGE_VISIT);
+                        nodeColor.put(finalNode, NODE_VISIT);
                         drawGraph();
                     });
 
-                    dfsVisit(next, visited);
-
-                    // Backtrack
+                    // Highlight new discovered node
                     addStep(() -> {
-                        edgeColor.put(e, EDGE_BACKTRACK);
+                        nodeColor.put(finalNext, NODE_VISIT);
                         drawGraph();
                     });
                 }
             }
+
+            // Node finished expanding
+            addStep(() -> {
+                nodeColor.put(node, NODE_DONE);
+                drawGraph();
+            });
         }
 
-        // Backtrack Node
-        addStep(() -> {
-            nodeColor.put(node, NODE_BACKTRACK);
-            drawGraph();
-        });
-
-        // Mark node done
-        addStep(() -> {
-            nodeColor.put(node, NODE_DONE);
-            drawGraph();
-        });
+        bfsTimeline.play();
     }
 
     private void addStep(Runnable r) {
-        dfsTimeline.getKeyFrames().add(
+        bfsTimeline.getKeyFrames().add(
                 new KeyFrame(Duration.millis(step * STEP_DURATION), e -> r.run())
         );
         step++;
@@ -115,13 +115,13 @@ public class Dfs {
         gc.setFill(Color.web("#000000"));
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-        gc.setLineWidth(2);
+        // Draw edges
         for (GraphEdge edge : graph.getEdges()) {
             gc.setStroke(edgeColor.getOrDefault(edge, EDGE_DEFAULT));
             gc.setLineWidth(2);
 
-            var u = edge.from;
-            var v = edge.to;
+            GraphNode u = edge.from;
+            GraphNode v = edge.to;
 
             gc.strokeLine(u.x, u.y, v.x, v.y);
 
@@ -131,6 +131,7 @@ public class Dfs {
             gc.fillText(String.valueOf(edge.weight), midX + 7, midY - 7);
         }
 
+        // Draw nodes
         for (GraphNode node : graph.getNodes()) {
             gc.setFill(nodeColor.getOrDefault(node, NODE_DEFAULT));
 

@@ -1,9 +1,6 @@
 package com.visualizer.algorithmvisualizer;
 
-import com.visualizer.algorithmvisualizer.graph.AdjacencyListGraph;
-import com.visualizer.algorithmvisualizer.graph.Dfs;
-import com.visualizer.algorithmvisualizer.graph.GraphEdge;
-import com.visualizer.algorithmvisualizer.graph.GraphNode;
+import com.visualizer.algorithmvisualizer.graph.*;
 import javafx.fxml.FXML;
 import javafx.geometry.VPos;
 import javafx.scene.canvas.Canvas;
@@ -68,7 +65,7 @@ public class GraphController {
             gc.setFill(Color.WHITE);
             double midX = (u.x + v.x) / 2;
             double midY = (u.y + v.y) / 2;
-            gc.fillText(String.valueOf(edge.weight), midX + 5, midY - 5);
+            gc.fillText(String.valueOf(edge.weight), midX + 7, midY - 7);
         }
 
         // Draw nodes
@@ -183,7 +180,12 @@ public class GraphController {
 
     private void animateBFS() {
         System.out.println("BFS running...");
-        // TODO: Replace with animation callback
+        if (graph.getNodes().isEmpty()) return;
+
+        Bfs bfsRunner = new Bfs(graph, canvas);
+
+        GraphNode start = graph.getNodes().get(0);
+        bfsRunner.animateBFS(start);
     }
 
     private void animateDijkstra() {
