@@ -212,7 +212,12 @@ public class GraphController {
 
     private void animateDijkstra() {
         System.out.println("Dijkstra running...");
-        // TODO: Replace with animation callback
+        if (graph.getNodes().isEmpty()) return;
+
+        Dijkstra dijkstraRunner = new Dijkstra(graph, canvas);
+
+        GraphNode start = graph.getNodes().get(0);
+        dijkstraRunner.animateDijkstra(start);
     }
 
     private void animateAStar() {
