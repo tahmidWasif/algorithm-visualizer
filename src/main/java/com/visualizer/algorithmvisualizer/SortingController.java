@@ -3,7 +3,7 @@ package com.visualizer.algorithmvisualizer;
 import com.visualizer.algorithmvisualizer.sorting.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.*;
@@ -15,7 +15,7 @@ import java.util.Random;
 
 public class SortingController {
 
-    @FXML private ChoiceBox<String> algorithmChoice;
+    @FXML private ComboBox<String> algorithmChoice;
     @FXML private HBox arrayContainer;
     @FXML private Slider speedSlider;
     @FXML private Label speedLabel;
