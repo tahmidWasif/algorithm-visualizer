@@ -11,7 +11,7 @@
 
     <top>
         <ToolBar >
-            <ChoiceBox fx:id="algorithmChoice">
+            <ComboBox fx:id="algorithmChoice">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
                         <String fx:value="Bubble Sort"/>
@@ -20,7 +20,7 @@
                         <String fx:value="Merge Sort" />
                     </FXCollections>
                 </items>
-            </ChoiceBox>
+            </ComboBox>
 
             <HBox style="-fx-background-color: #2b2d30; -fx-background-radius: 4; -fx-alignment: center; -fx-padding: 5px">
                 <Label text="Data Size:" style="-fx-text-fill: white" />

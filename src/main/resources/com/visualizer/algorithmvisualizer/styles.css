@@ -41,29 +41,6 @@
     -fx-background-color: #2b2d30;     /* hover color */
 }
 
-.choice-box {
-    -fx-background-color: #2b2d30;
-    -fx-mark-color: white;
-}
-
-.choice-box .label {
-    -fx-text-fill: white;
-}
-
-.choice-box .context-menu {
-    /*-fx-effect: null;*/
-    -fx-background-radius: 10px;
-    -fx-background-color: #2b2d30;
-    -fx-border-color: #2b2d30;
-    -fx-border-radius: 10px;
-}
-
-.choice-box .menu-item {
-    -fx-background-color: #2b2d30;
-    -fx-text-fill: white;
-
-}
-
 
 .slider .thumb {
     -fx-background-color: black;
