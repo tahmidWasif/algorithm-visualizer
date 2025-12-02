@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.visualizer.algorithmvisualizer.GraphController"
+            stylesheets="@styles.css">
+
+    <top>
+        <ToolBar style="-fx-background-color: #1e1f22; -fx-alignment: center; -fx-text-fill: white">
+            <HBox style="-fx-background-color: #2b2d30; -fx-background-radius: 4; -fx-alignment: center; -fx-padding: 2px;">
+                <Label text="Edge Weight:" style="-fx-padding: 5px; -fx-text-fill: white"/>
+                <TextField fx:id="weightField" text="1" prefWidth="40"/>
+            </HBox>
+            <Button fx:id="addEdgeBtn" text="Add Edge"/>
+
+            <ComboBox fx:id="algorithmSelector" promptText="Algorithm"/>
+            <Button fx:id="runBtn" text="Run"/>
+
+            <Pane HBox.hgrow="ALWAYS" />
+            <Button fx:id="clearBtn" text="Clear"/>
+        </ToolBar>
+    </top>
+
+    <center>
+        <HBox style="-fx-background-color: #000000">
+            <!-- Canvas for drawing the graph -->
+            <Canvas fx:id="canvas" width="1280" height="650" layoutX="10" layoutY="60"/>
+        </HBox>
+    </center>
+
+</BorderPane>
