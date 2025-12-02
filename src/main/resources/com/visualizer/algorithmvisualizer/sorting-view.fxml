@@ -11,6 +11,7 @@
 
     <top>
         <ToolBar >
+            <Button onAction="#switchToMain" text="Home"/>
             <ComboBox fx:id="algorithmChoice">
                 <items>
                     <FXCollections fx:factory="observableArrayList">

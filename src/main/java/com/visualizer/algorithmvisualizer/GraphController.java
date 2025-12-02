@@ -1,15 +1,22 @@
 package com.visualizer.algorithmvisualizer;
 
 import com.visualizer.algorithmvisualizer.graph.*;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.VPos;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -63,6 +70,16 @@ public class GraphController {
 
             draw();
         });
+    }
+
+    @FXML
+    private void switchToMain(ActionEvent e) throws IOException {
+        Parent newRoot = FXMLLoader.load(getClass().getResource("main-view.fxml"));
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+
+        Scene scene = new Scene(newRoot, 1280, 720);
+        stage.setScene(scene);
+        stage.show();
     }
 
     private void draw() {
@@ -212,7 +229,12 @@ public class GraphController {
 
     private void animateDijkstra() {
         System.out.println("Dijkstra running...");
-        // TODO: Replace with animation callback
+        if (graph.getNodes().isEmpty()) return;
+
+        Dijkstra dijkstraRunner = new Dijkstra(graph, canvas);
+
+        GraphNode start = graph.getNodes().get(0);
+        dijkstraRunner.animateDijkstra(start);
     }
 
     private void animateAStar() {
