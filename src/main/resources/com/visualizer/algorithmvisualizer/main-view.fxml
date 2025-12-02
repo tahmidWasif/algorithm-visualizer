@@ -14,7 +14,7 @@
             stylesheets="@styles.css">
     <center>
         <VBox alignment="CENTER" style="-fx-background-color: transparent; -fx-font-family: Consolas">
-            <Label fx:id="heading" style="-fx-font-size: 30">Welcome to Algorithm Visualizer</Label>
+            <Label fx:id="heading" style="-fx-font-size: 30; -fx-font-family: Arial; -fx-font-weight: bold; -fx-text-fill: white;">Welcome to Algorithm Visualizer</Label>
             <Button fx:id="switchToSort" onAction="#switchToSorting" text="Sorting Algorithms"/>
             <Button fx:id="switchToGraph" onAction="#switchToGraph" text="Graph Algorithms"/>
         </VBox>
