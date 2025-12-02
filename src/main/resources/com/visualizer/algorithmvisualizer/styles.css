@@ -65,3 +65,53 @@
     -fx-background-color: #000000;
     -fx-alignment: top-center;
 }
+
+#switchToSort {
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+    -fx-background-radius: 10;
+    -fx-padding:5;
+    -fx-alignment: center;
+    -fx-min-width: 150px;
+    -fx-min-height: 30px;
+    -fx-max-width: 150px;
+    -fx-max-height: 30px;
+}
+
+#switchToSort:hover {
+    -fx-text-fill: white;
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-border-radius: 10;
+    -fx-border-color: white;
+    -fx-padding:5;
+    -fx-alignment: center;
+    -fx-min-width: 150px;
+    -fx-min-height: 30px;
+    -fx-max-width: 150px;
+    -fx-max-height: 30px;
+}
+
+#switchToGraph {
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+    -fx-background-radius: 10;
+    -fx-padding:5;
+    -fx-alignment: center;
+    -fx-min-width: 150px;
+    -fx-min-height: 30px;
+    -fx-max-width: 150px;
+    -fx-max-height: 30px;
+}
+
+#switchToGraph:hover {
+    -fx-text-fill: white;
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-border-radius: 10;
+    -fx-border-color: white;
+    -fx-padding:5;
+    -fx-alignment: center;
+    -fx-min-width: 150px;
+    -fx-min-height: 30px;
+    -fx-max-width: 150px;
+    -fx-max-height: 30px;
+}

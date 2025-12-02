@@ -6,18 +6,17 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx"
+
+<BorderPane prefWidth="1280" prefHeight="720"
+            xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.visualizer.algorithmvisualizer.MainController"
-            prefHeight="400.0" prefWidth="600.0"
             stylesheets="@styles.css">
-
     <center>
-        <VBox alignment="CENTER">
-            <Label>{PlaceHolder Text}</Label>
-            <Button onAction="#switchToSorting" text="Sorting Algorithms"/>
-            <Button onAction="#switchToGraph" text="Graph Algorithms"/>
+        <VBox alignment="CENTER" style="-fx-background-color: transparent; -fx-font-family: Consolas">
+            <Label fx:id="heading" style="-fx-font-size: 30; -fx-font-family: Arial; -fx-font-weight: bold; -fx-text-fill: white;">Welcome to Algorithm Visualizer</Label>
+            <Button fx:id="switchToSort" onAction="#switchToSorting" text="Sorting Algorithms"/>
+            <Button fx:id="switchToGraph" onAction="#switchToGraph" text="Graph Algorithms"/>
         </VBox>
     </center>
-
 </BorderPane>
