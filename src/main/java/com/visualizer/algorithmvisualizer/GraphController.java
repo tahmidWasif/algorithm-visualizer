@@ -44,6 +44,25 @@ public class GraphController {
 
     @FXML
     public void initialize() {
+
+        // clear button
+        clearBtn.setOnMousePressed(e -> {
+            clearBtn.setStyle("-fx-background-color: red; -fx-text-fill: white");
+        });
+
+        clearBtn.setOnMouseReleased(e -> {
+            clearBtn.setStyle("-fx-background-color: #2b2d30; -fx-text-fill: white;");
+        });
+
+        //run button
+        runBtn.setOnMousePressed(e -> {
+            runBtn.setStyle("-fx-background-color: green; -fx-text-fill: white");
+        });
+
+        runBtn.setOnMouseReleased(e -> {
+            runBtn.setStyle("-fx-background-color: #2b2d30; -fx-text-fill: white;");
+        });
+
         gc = canvas.getGraphicsContext2D();
         algorithmSelector.getItems().addAll("DFS", "BFS", "Dijkstra");
 
