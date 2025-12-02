@@ -37,9 +37,21 @@ public class SortingController {
     @FXML private VBox levelsContainer;
     @FXML private Slider arraySize;
     @FXML private Label sizeLabel;
+    @FXML private Label description;
+    @FXML private Label timeComplexity;
 
     private int[] data;
     private List<StackPane> cellNodes = new ArrayList<>();
+
+    String bubbleSortText = "Bubble sort is a comparison-based sorting algorithm that repeatedly steps through the list, compares each pair of adjacent elements, and swaps them if they are in the wrong order. This process continues until no more swaps are needed, meaning the list is sorted.";
+    String insertionSortText = "Insertion sort is a sorting algorithm that builds the final sorted list one element at a time by taking each element and inserting it into its correct position among the previously sorted elements.";
+    String selectionSortText = "Selection sort is a sorting algorithm that repeatedly selects the smallest element from the unsorted portion of the list and swaps it with the first unsorted element, gradually expanding the sorted portion from left to right.";
+    String mergeSortText = "Merge sort is a divide-and-conquer sorting algorithm that recursively splits the list into smaller halves, sorts each half, and then merges the sorted halves back together to produce a fully sorted list.";
+
+    String bubbleTime = "   Best Case: O(n²)    Worst Case: O(n²) Average Case: O(n²)";
+    String insertionTime = "   Best Case: O(n)    Worst Case: O(n²) Average Case: O(n²)";
+    String selectionTime = "   Best Case: O(n²)    Worst Case: O(n²) Average Case: O(n²)";
+    String mergeTime = "Best Case: O(nlogn) Worst Case: O(nlogn) Average Case: O(nlogn)";
 
     @FXML
     public void initialize() {
@@ -77,8 +89,30 @@ public class SortingController {
         });
 
         // description
+        description.setText(bubbleSortText);
+        timeComplexity.setText(bubbleTime);
+
         algorithmChoice.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             heading.setText(newVal);
+
+            switch (newVal) {
+                case "Bubble Sort" -> {
+                    description.setText(bubbleSortText);
+                    timeComplexity.setText(bubbleTime);
+                }
+                case "Insertion Sort" -> {
+                    description.setText(insertionSortText);
+                    timeComplexity.setText(insertionTime);
+                }
+                case "Selection Sort" -> {
+                    description.setText(selectionSortText);
+                    timeComplexity.setText(selectionTime);
+                }
+                case "Merge Sort" -> {
+                    description.setText(mergeSortText);
+                    timeComplexity.setText(mergeTime);
+                }
+            }
         });
     }
 

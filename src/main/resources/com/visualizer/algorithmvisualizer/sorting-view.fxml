@@ -49,9 +49,10 @@
 
         <ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-border-color: #1e1f22; -fx-background-color: #1e1f22">
             <VBox fx:id="levelsContainer" spacing="10">
-                <VBox style="-fx-alignment: top-center">
-                    <Label fx:id="heading" style="-fx-text-fill: white; -fx-text-alignment: center; -fx-font-size: 20px; -fx-font-weight: bold;">Bubble Sort</Label>
-                    <Label fx:id="description" style="-fx-text-fill: white; -fx-text-alignment: center; -fx-font-size: 16px; -fx-font-weight: normal;"></Label>
+                <VBox style="-fx-alignment: center;" prefHeight="250" minHeight="250" maxHeight="250" >
+                    <Label fx:id="heading" style="-fx-text-fill: white; -fx-text-alignment: center; -fx-font-weight: bold;">Bubble Sort</Label>
+                    <Label fx:id="description" style="-fx-text-fill: white; -fx-text-alignment: center; -fx-font-weight: normal;"></Label>
+                    <Label fx:id="timeComplexity" style="-fx-text-fill: white; -fx-text-alignment: center; -fx-font-weight: bold;"></Label>
                 </VBox>
                 <HBox fx:id="arrayContainer" spacing="10" style="-fx-padding: 20; -fx-alignment: center; -fx-background-color: black; -fx-border-color: black" />
             </VBox>

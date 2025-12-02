@@ -65,11 +65,40 @@
 }
 
 #heading {
+    -fx-font-family: Consolas;
     -fx-text-fill: white;
     -fx-text-alignment: center;
-    -fx-font-size: 20px;
+    -fx-font-size: 30px;
     -fx-font-weight: bold;
-    -fx-padding: 15px;
+    -fx-padding: 20 0 0 0;
+    -fx-pref-height: 55;
+    -fx-min-height: 55;
+    -fx-max-height: 55;
+}
+
+#description, #timeComplexity {
+    -fx-font-style: italic;
+    -fx-font-size: 16px;
+    -fx-wrap-text: true;
+    -fx-pref-width: 950;
+    -fx-min-width: 950;
+    -fx-max-width: 950;
+    -fx-pref-height: 75;
+    -fx-min-height: 75;
+    -fx-max-height: 75;
+}
+
+#timeComplexity {
+    -fx-padding: 0 0 15 0;
+    -fx-font-style: normal;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+    -fx-pref-width: 180;
+    -fx-min-width: 180;
+    -fx-max-width: 180;
+    -fx-pref-height: 100;
+    -fx-min-height: 100;
+    -fx-max-height: 100;
 }
 
 #levelsContainer {
