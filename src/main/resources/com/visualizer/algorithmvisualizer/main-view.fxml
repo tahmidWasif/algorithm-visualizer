@@ -13,7 +13,8 @@
             stylesheets="@styles.css">
 
     <center>
-        <VBox>
+        <VBox alignment="CENTER">
+            <Label>{PlaceHolder Text}</Label>
             <Button onAction="#switchToSorting" text="Sorting Algorithms"/>
             <Button onAction="#switchToGraph" text="Graph Algorithms"/>
         </VBox>
