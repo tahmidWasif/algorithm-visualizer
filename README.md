@@ -16,6 +16,16 @@ Bubble Sort highlighting the pair currently being compared:
 
 ![Bubble Sort visualization](docs/images/sorting-visualization.png)
 
+### Merge Sort recursive visualization
+
+The Merge Sort animation builds a visible recursion tree as it divides the original array into progressively smaller subarrays:
+
+![Merge Sort divide phase](docs/images/merge-sort-divide.png)
+
+During the merge phase, the visualizer highlights the values being compared and animates the selected value back into its parent subarray:
+
+![Merge Sort merge phase](docs/images/merge-sort-merge.png)
+
 ### Graph visualization
 
 Dijkstra's algorithm constructing a shortest-path tree on an interactively created graph:
